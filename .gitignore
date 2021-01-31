@@ -1,0 +1,11 @@
+*.swp
+*.swa
+*.out
+
+*.exe
+*.o
+*.layout
+
+*.lock
+
+*.ini
