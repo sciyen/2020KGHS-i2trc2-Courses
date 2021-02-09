@@ -11,6 +11,9 @@ beautifulsoup4 = "*"
 numpy = "*"
 matplotlib = "*"
 flask = "*"
+tensorflow = "*"
+opencv-python = "*"
+keras = "*"
 
 [requires]
 python_version = "3.8"

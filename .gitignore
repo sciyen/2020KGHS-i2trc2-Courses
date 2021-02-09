@@ -2,6 +2,10 @@
 *.swa
 *.out
 
+__pycache__
+
+py-lecture/READ/upload/*
+
 *.exe
 *.o
 *.layout
