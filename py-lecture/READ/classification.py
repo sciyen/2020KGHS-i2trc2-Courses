@@ -42,7 +42,7 @@ def test_mnist():
 
     x_test = x_test.reshape(10000, 28, 28, 1)
     x_test = x_test.astype('float32') / 255
-    model = Classificator('./cnn16.h5')
+    model = Classificator('./model/cnn16.h5')
     number = model.predict(x_test[0:10])
     print(number)
 
@@ -50,7 +50,7 @@ def test_mnist():
 def test_cnn_img():
     import readImg
     test = readImg.readImg(r"upload/test2.png")
-    model = Classificator('./cnn16.h5')
+    model = Classificator('./model/cnn16.h5')
     data = model.preprocessing(test)
     number = model.predict(data)
     print(number)

@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1 class="display-3 text-center">REcognize Alphabet Digits (READ)</h1>
-        <div class="mx-auto border p-4 rounded" style="width: 400px">
+        <div class="mx-auto border p-4 rounded" style="width: 500px">
             <form enctype=multipart/form-data action="/upload" method="POST">
                 <div class="form-group">
                     <label for="input-img-upload">Image to be converted</label>
@@ -17,8 +17,10 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 
+
             <p>{{warning_msg}}</p>
 
+            <img src={{img_path}} style="width: 450px" class="mx-auto">
             <p>The converted phone number is: {{number}}</p>
         </div>
     </body>

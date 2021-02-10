@@ -1,9 +1,9 @@
 import os
-from flask import flash, Flask, request, render_template
+from flask import flash, Flask, request, render_template, send_from_directory
 import readImg
 import classification
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 
 @app.route('/')
@@ -31,14 +31,21 @@ def upload_file():
             return render_template('index.html', warning_msg='No selected file')
 
         img_filename = os.path.join('./upload', file.filename)
+        output_filename = os.path.join('./upload', 'out' + file.filename)
         file.save(img_filename)
 
-        model = classification.Classificator('./cnn16.h5')
-        arr = readImg.readImg(img_filename)
+        model = classification.Classificator('./model/cnn_com.h5')
+        arr = readImg.readImg(img_filename, output_filename)
+
         data = model.preprocessing(arr)
         numbers = model.predict(data)
 
-        return render_template('index.html', number=numbers)
+        return render_template('index.html', number=numbers, img_path=output_filename)
+
+
+@app.route('/upload/<path:path>')
+def send_img(path):
+    return send_from_directory('upload', path)
 
 
 if __name__ == '__main__':
@@ -46,4 +53,4 @@ if __name__ == '__main__':
     app.debug = True
 
     app.secret_key = "I am the Key"
-    app.run()
+    app.run(host="0.0.0.0", port=10418)

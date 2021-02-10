@@ -5,7 +5,10 @@
 __pycache__
 
 py-lecture/READ/upload/*
-py-lecture/READ/upload/imgs
+py-lecture/READ/imgs
+
+# The classification model
+*.h5
 
 *.exe
 *.o
