@@ -5,6 +5,7 @@
 __pycache__
 
 py-lecture/READ/upload/*
+py-lecture/READ/upload/imgs
 
 *.exe
 *.o

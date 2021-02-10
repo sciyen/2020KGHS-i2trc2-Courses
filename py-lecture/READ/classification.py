@@ -9,10 +9,10 @@ class Classificator:
         '''
         self.model = keras.models.load_model(path_to_model)
 
-    def preprocessing(self, arr):
+    def preprocessing(self, images):
         '''
         Preprocess the raw image array generated from readImg
-        which has the shape like [[x, img], [...]]
+        which has the shape like [[img], [...]]
 
         The model input shape should be the same as the model
         built, which is [None, 28, 28, 1]
@@ -22,12 +22,7 @@ class Classificator:
             2d numpy array shape in [None, 28, 28, 1], which 
             ranges in 0 ~ 1
         '''
-        data = []
-        for x, img in arr:
-            x_test = img.reshape((28, 28, 1))
-            x_test = x_test.astype('float32') / 255
-            data.append(x_test)
-        return np.array(data)
+        return images.reshape((images.shape[0], 28, 28, 1)).astype('float32') / 255
 
     def predict(self, data):
         '''
@@ -62,4 +57,4 @@ def test_cnn_img():
 
 
 if __name__ == '__main__':
-    test_mnist()
+    test_cnn_img()
