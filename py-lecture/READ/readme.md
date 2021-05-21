@@ -22,7 +22,7 @@ $ pipenv shell
 ## Run the server
 The server is based on `Flask`, to run the server, just type:
 ```
-python serv.js
+python serv.py
 ```
 
 then, the server would start listening on the port `10418`.

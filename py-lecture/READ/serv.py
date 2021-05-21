@@ -5,6 +5,8 @@ import classification
 
 app = Flask(__name__, static_url_path='')
 
+model = classification.load('./model/cnn_com.h5')
+
 
 @app.route('/')
 def root():
@@ -34,11 +36,9 @@ def upload_file():
         output_filename = os.path.join('./upload', 'out' + file.filename)
         file.save(img_filename)
 
-        model = classification.Classificator('./model/cnn_com.h5')
-        arr = readImg.readImg(img_filename, output_filename)
+        image = readImg.readImg(img_filename, output_filename)
 
-        data = model.preprocessing(arr)
-        numbers = model.predict(data)
+        numbers = classification.predict(model, image)
 
         return render_template('index.html', number=numbers, img_path=output_filename)
 

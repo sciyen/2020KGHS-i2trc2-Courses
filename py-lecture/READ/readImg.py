@@ -19,11 +19,13 @@ def readImg(path, out_path=None):
     img = cv2.dilate(img, kernel, iterations=1)
 
     # 二值化
-    ret, th = cv2.threshold(img, mean, 255, cv2.THRESH_BINARY)
+    ret, th = cv2.threshold(img, mean-20, 255, cv2.THRESH_BINARY)
+    #cv2.imshow('th', th)
 
     # 找輪廓
     contours, hierarchy = cv2.findContours(
         th, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    print(hierarchy.shape)
 
     # 存個別的數字圖及其左上角x座標
     nums = []
@@ -73,8 +75,10 @@ def readImg(path, out_path=None):
 
 
 if __name__ == "__main__":
-    test = readImg(r"upload/99534.jpg")
-    out = np.concatenate(test, axis=1)
-    cv2.imshow('num', out)
+    test = readImg(r"upload/number2.jpg")
+    for i, o in enumerate(test):
+        cv2.imshow(str(i), o)
+    #out = np.concatenate(test, axis=1)
+    #cv2.imshow('num', out)
     cv2.waitKey(0)
     cv2.destroyAllWindows()

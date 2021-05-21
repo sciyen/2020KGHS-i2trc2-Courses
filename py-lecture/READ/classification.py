@@ -2,35 +2,38 @@ import numpy as np
 import keras
 
 
-class Classificator:
-    def __init__(self, path_to_model):
-        '''
-        Load the model only on initializing. 
-        '''
-        self.model = keras.models.load_model(path_to_model)
+def load(path_to_model):
+    '''
+    Load the model only on initializing. 
+    '''
+    model = keras.models.load_model(path_to_model)
+    return model
 
-    def preprocessing(self, images):
-        '''
-        Preprocess the raw image array generated from readImg
-        which has the shape like [[img], [...]]
 
-        The model input shape should be the same as the model
-        built, which is [None, 28, 28, 1]
+def preprocessing(images):
+    '''
+    Preprocess the raw image array generated from readImg
+    which has the shape like [[img], [...]]
 
-        @Param
-        @Return:
-            2d numpy array shape in [None, 28, 28, 1], which 
-            ranges in 0 ~ 1
-        '''
-        return images.reshape((images.shape[0], 28, 28, 1)).astype('float32') / 255
+    The model input shape should be the same as the model
+    built, which is [None, 28, 28, 1]
 
-    def predict(self, data):
-        '''
-        Run the model with predicting function, and output the
-        index that having the maximum probability.
-        '''
-        prediction = self.model.predict(data)
-        return np.argmax(prediction, axis=1)
+    @Param
+    @Return:
+        2d numpy array shape in [None, 28, 28, 1], which 
+        ranges in 0 ~ 1
+    '''
+    return images.reshape((images.shape[0], 28, 28, 1)).astype('float32') / 255
+
+
+def predict(model, image):
+    '''
+    Run the model with predicting function, and output the
+    index that having the maximum probability.
+    '''
+    data = preprocessing(image)
+    prediction = model.predict(data)
+    return np.argmax(prediction, axis=1)
 
 
 def test_mnist():
